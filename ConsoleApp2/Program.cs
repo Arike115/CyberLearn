@@ -10,45 +10,33 @@ namespace ConsoleApp2
     {
         static void Main(string[] args)
         {
-            int[] evennumbers = { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 8, 19, 11,2,4,12,16 };
+            int[] evennumbers = { 2, 4,8};
             int[] oddnumbers = { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 18, 2, 12 };
             // string[] words = {"words","all","come","those" };
 
-            //union
-            var allnumbers = evennumbers.Union(oddnumbers)
-                                        .OrderBy(x => x);
+            //Agregate Operators
 
-            var numbers = evennumbers.Where(x => x > 10)
-                                     .Union(evennumbers.Where(x => x < 10));
-            foreach (var i in allnumbers)
-            {
-                Console.WriteLine(i);
+            //sum
 
-            }
+            var numbers = evennumbers.Where(x => x > 20)
+                                      .Sum(x => x);
+            Console.WriteLine(numbers);
 
-            //intersect
-            var queuenumber = evennumbers.Intersect(oddnumbers)
-                                         .OrderBy(x => x);
-            foreach (var i in queuenumber)
-            {
-                Console.WriteLine($"intersect::{i}");
+            ////min
+            var number = oddnumbers.Min(x => x);
+            Console.WriteLine(number);
 
-            }
-            //except
-            var exceptnumber = oddnumbers.Except(evennumbers);
-            foreach (var i in exceptnumber)
-            {
-                Console.WriteLine(i);
-            }
-            //Distict
+            ////max
+            var num = evennumbers.Max(x => x);
+            Console.WriteLine(num);
 
-            var distinctnumber = oddnumbers.Distinct();
-            foreach (var i in distinctnumber)
-            {
-                Console.WriteLine(i);
-            }
+            ////average
+            var avaragenum = oddnumbers.Average(x => x);
+            Console.WriteLine(avaragenum);
 
-
+            //Agregate
+            var allsum = evennumbers.Aggregate((a,b) => a*b);
+            Console.WriteLine(allsum);
         }
     }
 }
