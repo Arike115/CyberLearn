@@ -8,35 +8,49 @@ namespace ConsoleApp2
 {
     internal class Program
     {
+       
         static void Main(string[] args)
         {
-            int[] evennumbers = { 2, 4,8};
+            var value = student.getstudent();
+            int[] evennumbers = {};
             int[] oddnumbers = { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 18, 2, 12 };
-            // string[] words = {"words","all","come","those" };
+            string[] words = { };
+            
+            //element operators
 
-            //Agregate Operators
-
-            //sum
-
-            var numbers = evennumbers.Where(x => x > 20)
-                                      .Sum(x => x);
+            //First or FirstOrDefault
+            var numbers = words.FirstOrDefault();
             Console.WriteLine(numbers);
+            //Last or lastordefault
+            var allodds = evennumbers.LastOrDefault();
+            Console.WriteLine(allodds);
+            //single or single or default
+            var all = oddnumbers.SingleOrDefault(x => x == 3);
+             Console.WriteLine(all);
+            //Console.WriteLine(all);
 
-            ////min
-            var number = oddnumbers.Min(x => x);
-            Console.WriteLine(number);
+            
+           
+            
 
-            ////max
-            var num = evennumbers.Max(x => x);
-            Console.WriteLine(num);
+            
 
-            ////average
-            var avaragenum = oddnumbers.Average(x => x);
-            Console.WriteLine(avaragenum);
+        }
+       
 
-            //Agregate
-            var allsum = evennumbers.Aggregate((a,b) => a*b);
-            Console.WriteLine(allsum);
+    }
+    public class student
+    {
+        public string name { get; set; }
+        public string places { get; set; }
+
+        public static List<student> getstudent()
+        {
+            return new List<student>();
+            {
+                new student { name = "john", places = "Lagos" };
+                new student { name = "Edward", places = "Ibadan" };
+            }
         }
     }
 }
