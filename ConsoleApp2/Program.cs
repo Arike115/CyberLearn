@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -12,43 +13,56 @@ namespace ConsoleApp2
         //Task.Run
        public static void Main(string[] args)
         {
-            Console.WriteLine("calculation started");
-            calculate();
+           Task[] t = new Task[2];
+            string[] files = null;
+            string[] dir = null;
+
+            string docdirectory = Environment.GetFolderPath(Environment.SpecialFolder.System);
+            t[0] = Task.Factory.StartNew(() => files = Directory.GetFiles(docdirectory));
+            t[1] = Task.Factory.StartNew(() => dir = Directory.GetDirectories(docdirectory));
+
+            Task.Factory.ContinueWhenAny(t, completedfile =>
+            {
+                Console.WriteLine("{0}::Contains", docdirectory);
+                Console.WriteLine("{0}::files", files.Length);
+                Console.WriteLine("{0}::subdirectories", dir.Length);
+            });
+            Console.ReadKey();
         }
-        public static void calculate()
-        {
-            Task.Run(() =>
-                calculate1()
-            );
+        //public static void calculate()
+        //{
+        //    Task.Run(() =>
+        //        calculate1()
+        //    );
             
-            Task.Run(() =>
-                calculate2()
-            );
-           Task.Run(() =>
-                calculate3()
-           );
+        //    Task.Run(() =>
+        //        calculate2()
+        //    );
+        //   Task.Run(() =>
+        //        calculate3()
+        //   );
 
-            Console.Read();
-        }
+        //    Console.Read();
+        //}
 
 
-        public static int calculate1()
-        {
-            Thread.Sleep(3000);
-            Console.WriteLine("caculation 1 in progress");
-            return 500;
-        }
-        public static int calculate2()
-        {
-            Thread.Sleep(2000);
-            Console.WriteLine("caculation 2 in progress");
-            return 2100;
-        }
-        public static int calculate3()
-        {
-            Console.WriteLine("caculation 3 in progress");
-            return 100;
-        }
+        //public static int calculate1()
+        //{
+        //    Thread.Sleep(3000);
+        //    Console.WriteLine("caculation 1 in progress");
+        //    return 500;
+        //}
+        //public static int calculate2()
+        //{
+        //    Thread.Sleep(2000);
+        //    Console.WriteLine("caculation 2 in progress");
+        //    return 2100;
+        //}
+        //public static int calculate3()
+        //{
+        //    Console.WriteLine("caculation 3 in progress");
+        //    return 100;
+        //}
         
     }
    
