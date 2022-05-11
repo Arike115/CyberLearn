@@ -13,21 +13,42 @@ namespace ConsoleApp2
         //Task.Run
        public static void Main(string[] args)
         {
-           Task[] t = new Task[2];
-            string[] files = null;
-            string[] dir = null;
+            //Task[] t = new Task[2];
+            // string[] files = null;
+            // string[] dir = null;
 
-            string docdirectory = Environment.GetFolderPath(Environment.SpecialFolder.System);
-            t[0] = Task.Factory.StartNew(() => files = Directory.GetFiles(docdirectory));
-            t[1] = Task.Factory.StartNew(() => dir = Directory.GetDirectories(docdirectory));
+            // string docdirectory = Environment.GetFolderPath(Environment.SpecialFolder.System);
+            // t[0] = Task.Factory.StartNew(() => files = Directory.GetFiles(docdirectory));
+            // t[1] = Task.Factory.StartNew(() => dir = Directory.GetDirectories(docdirectory));
 
-            Task.Factory.ContinueWhenAny(t, completedfile =>
+            // Task.Factory.ContinueWhenAny(t, completedfile =>
+            // {
+            //     Console.WriteLine("{0}::Contains", docdirectory);
+            //     Console.WriteLine("{0}::files", files.Length);
+            //     Console.WriteLine("{0}::subdirectories", dir.Length);
+            // });
+            //Console.ReadKey();
+            Console.Write("Enter path: ");
+            
+            string path = Console.ReadLine();
+            if (path == null)
             {
-                Console.WriteLine("{0}::Contains", docdirectory);
-                Console.WriteLine("{0}::files", files.Length);
-                Console.WriteLine("{0}::subdirectories", dir.Length);
-            });
-            Console.ReadKey();
+                Console.WriteLine("Invalid input");
+            }
+            else
+            {
+                if (Directory.Exists(path))
+                {
+                    Directory.Delete(path);
+                    Console.WriteLine("Folder deleted");
+                }
+                else
+                {
+                    Console.WriteLine("Folder not found");
+                }
+            }
+
+            
         }
         //public static void calculate()
         //{
